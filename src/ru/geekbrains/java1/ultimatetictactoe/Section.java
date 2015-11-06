@@ -5,7 +5,6 @@ public class Section {
     private String blankCell;
     private int fieldSize;
 
-
     public void setBlankCell(String blankCell) {
         this.blankCell = blankCell;
     }

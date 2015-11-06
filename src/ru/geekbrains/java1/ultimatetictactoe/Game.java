@@ -5,7 +5,6 @@ public class Game {
     PlayingField playingField;
     private static Game instance;
 
-
     public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
@@ -14,9 +13,7 @@ public class Game {
     }
 
     private Game() {
-
     }
-
 
     void init() {
         playingField = new PlayingField();
@@ -25,5 +22,4 @@ public class Game {
 
     void start() {
     }
-
 }

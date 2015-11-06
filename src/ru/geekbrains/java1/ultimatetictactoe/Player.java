@@ -1,12 +1,10 @@
 package ru.geekbrains.java1.ultimatetictactoe;
 
 
-
 public class Player {
     String name;
     Player[] players;
     Player player;
-
 
     public void setCurrentActivePlayer(Player player) {
         this.player = player;

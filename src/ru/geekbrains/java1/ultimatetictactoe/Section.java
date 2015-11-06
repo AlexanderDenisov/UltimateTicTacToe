@@ -5,7 +5,7 @@ public class Section {
     Player player;
     private String blankCell;
     private int fieldSize;
-    boolean isActive;
+
 
     public void setBlankCell(String blankCell) {
         this.blankCell = blankCell;
@@ -21,9 +21,5 @@ public class Section {
 
     public int getFieldSize() {
         return fieldSize;
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
     }
 }

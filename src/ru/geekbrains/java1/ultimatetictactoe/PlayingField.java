@@ -4,6 +4,8 @@ package ru.geekbrains.java1.ultimatetictactoe;
 public class PlayingField {
     Section section;
     String[] playingField;
+    int filledCells;
+
 
 
     PlayingField() {

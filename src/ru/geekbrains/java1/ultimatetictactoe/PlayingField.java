@@ -1,34 +1,37 @@
 package ru.geekbrains.java1.ultimatetictactoe;
 
-import java.util.Arrays;
 
 public class PlayingField {
-    public static void main(String[] args) {
+    Section section;
+    String[] playingField;
 
-        final char BLANK_CELL = '_';
-        final int ROW_SIZE = 9;
 
-        char[] playingField = new char[ROW_SIZE * ROW_SIZE];
-
-        /*for (int i = 0; i < playingField.length; i++) {
-            playingField[i] = BLANK_CELL;
-        }*/
-        Arrays.fill(playingField, BLANK_CELL);
-
-        playingField[80] = 'X';
-
-        showPlayingSection(playingField, ROW_SIZE);
-    }
-
-    static void showPlayingSection(char[] cell, int rowSize) {
-        for (int i = 0; i < cell.length; i++) {
-            System.out.print(cell[i] + " ");
-            if ((i + 1) % rowSize == 0) {
+    PlayingField() {
+        section = new Section();
+        section.setFieldSize(9);
+        section.setBlankCell("[ ]");
+        section.getBlankCell();
+        playingField = new String[section.getFieldSize() * section.getFieldSize()];
+        for (int i = 0; i < playingField.length; i++) {
+            playingField[i] = section.getBlankCell();
+        }
+        System.out.print("\t");
+        for (int i = 0; i < playingField.length; i++) {
+            System.out.print(playingField[i] + "\t");
+            if ((i + 1) % section.getFieldSize() == 0) {
+                System.out.print("\n");
+            }
+            if ((i + 1) % 3 == 0) {
+                System.out.print("\t");
+            }
+            if ((i + 1) % 27 == 0) {
                 System.out.println();
+                System.out.print("\t");
             }
         }
     }
+
+    public String[] getPlayingField() {
+        return playingField;
+    }
 }
-
-
-

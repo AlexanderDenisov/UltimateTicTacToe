@@ -5,8 +5,6 @@ public class PlayingField {
     Section section;
     String[] playingField;
 
-
-
     PlayingField() {
         section = new Section();
         section.setFieldSize(9);

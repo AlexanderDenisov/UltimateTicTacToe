@@ -2,7 +2,6 @@ package ru.geekbrains.java1.ultimatetictactoe;
 
 
 public class Section {
-    Player player;
     private String blankCell;
     private int fieldSize;
 

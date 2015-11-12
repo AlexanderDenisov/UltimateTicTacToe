@@ -1,26 +1,28 @@
 package ru.geekbrains.java1.ultimatetictactoe;
 
 
+import java.util.Random;
+
 public class Field {
     private String blankCell;
     private int fieldSize;
     private String[][] playingField;
 
-    public Field() {
+    Field() {
     }
 
-    public void setCoordinates(int fieldSize) {
+    protected void setCoordinates(int fieldSize) {
         this.fieldSize = fieldSize;
     }
 
-    public void getHorizontalCoordinates() {
+    protected void getHorizontalCoordinates() {
         System.out.print(" " + " ");
-        for (int i = fieldSize; i > 0; i--) {
+        for (int i = 1; i < fieldSize + 1; i++) {
             System.out.print(" " + i + " ");
         }
     }
 
-    public void setPlayingField(String blankCell, int fieldSize) {
+    protected void setPlayingField(String blankCell, int fieldSize) {
         this.fieldSize = fieldSize;
         this.blankCell = blankCell;
         playingField = new String[fieldSize][fieldSize];
@@ -31,7 +33,15 @@ public class Field {
         }
     }
 
-    public String[][] getPlayingField() {
+    protected String[][] getRandomPoint(int fieldSize) {
+        Random random = new Random();
+        Point point = new Point(random.nextInt(fieldSize), random.nextInt(fieldSize));
+        playingField[point.getX()][point.getY()] = "[X]";
+        return playingField;
+    }
+
+    protected String[][] getPlayingField() {
+        getRandomPoint(fieldSize);
         System.out.println();
         for (int i = 0; i < playingField.length; i++) {
             System.out.print((i + 1) + " ");
@@ -43,19 +53,19 @@ public class Field {
         return playingField;
     }
 
-    public void setBlankCell(String blankCell) {
+    protected void setBlankCell(String blankCell) {
         this.blankCell = blankCell;
     }
 
-    public String getBlankCell() {
+    protected String getBlankCell() {
         return blankCell;
     }
 
-    public void setFieldSize(int fieldSize) {
+    protected void setFieldSize(int fieldSize) {
         this.fieldSize = fieldSize;
     }
 
-    public int getFieldSize() {
+    protected int getFieldSize() {
         return fieldSize;
     }
 }

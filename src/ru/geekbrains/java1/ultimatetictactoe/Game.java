@@ -2,13 +2,11 @@ package ru.geekbrains.java1.ultimatetictactoe;
 
 
 public class Game {
-    Field coordinates;
-    Field fieldSize;
-    Field blankCell;
-    Field field;
     private static Game instance;
+    private Field field = new Field();
+    private CreateField createField = new CreateField();
 
-    public static Game getInstance() {
+    protected static Game getInstance() {
         if (instance == null) {
             instance = new Game();
         }
@@ -18,19 +16,11 @@ public class Game {
     private Game() {
     }
 
-    void init() {
-        fieldSize = new Field();
-        fieldSize.setFieldSize(3);
-        coordinates = new Field();
-        coordinates.setCoordinates(fieldSize.getFieldSize());
-        blankCell = new Field();
-        blankCell.setBlankCell("[ ]");
-        field = new Field();
-        field.setPlayingField(blankCell.getBlankCell(), fieldSize.getFieldSize());
+    protected void init() {
+        createField.setField(field);
     }
 
-    void start() {
-        coordinates.getHorizontalCoordinates();
-        field.getPlayingField();
+    protected void start() {
+        createField.getField();
     }
 }

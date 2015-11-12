@@ -2,9 +2,12 @@ package ru.geekbrains.java1.ultimatetictactoe;
 
 
 public class Player {
-    String name;
-    Player[] players;
-    Player player;
+    private String name;
+    private Player[] players;
+    private Player player;
+
+    Player() {
+    }
 
     public void setCurrentActivePlayer(Player player) {
         this.player = player;
@@ -29,5 +32,4 @@ public class Player {
     public Player[] getPlayer() {
         return players;
     }
-
 }

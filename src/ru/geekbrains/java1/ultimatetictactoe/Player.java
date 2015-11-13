@@ -3,8 +3,10 @@ package ru.geekbrains.java1.ultimatetictactoe;
 
 public class Player {
     private String name;
-    private Player[] players;
     private Player player;
+    private Point point;
+    private int x;
+    private int y;
 
     Player() {
     }
@@ -23,13 +25,5 @@ public class Player {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setPlayer(Player[] players) {
-        this.players = players;
-    }
-
-    public Player[] getPlayer() {
-        return players;
     }
 }

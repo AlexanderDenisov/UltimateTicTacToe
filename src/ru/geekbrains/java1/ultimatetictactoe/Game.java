@@ -3,8 +3,7 @@ package ru.geekbrains.java1.ultimatetictactoe;
 
 public class Game {
     private static Game instance;
-    private Field field = new Field();
-    private CreateField createField = new CreateField();
+    private FieldMaker fieldMaker = new FieldMaker();
 
     protected static Game getInstance() {
         if (instance == null) {
@@ -16,11 +15,11 @@ public class Game {
     private Game() {
     }
 
-    protected void init() {
-        createField.setField(field);
+    void init() {
+        fieldMaker.setField();
     }
 
-    protected void start() {
-        createField.getField();
+    void start() {
+        fieldMaker.getField();
     }
 }

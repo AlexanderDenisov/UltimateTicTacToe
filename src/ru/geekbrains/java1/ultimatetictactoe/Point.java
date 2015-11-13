@@ -4,8 +4,9 @@ package ru.geekbrains.java1.ultimatetictactoe;
 public class Point {
     private int x;
     private int y;
+    Point point;
 
-    Point() {
+    public Point() {
     }
 
     public void setX(int x) {
@@ -24,7 +25,7 @@ public class Point {
         return y;
     }
 
-    Point(int x, int y) {
+    public Point(int x, int y) {
         setX(this.x = x);
         setY(this.y = y);
     }

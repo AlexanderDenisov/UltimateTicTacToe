@@ -1,10 +1,11 @@
 package ru.geekbrains.java1.ultimatetictactoe;
 
 
+import java.util.Random;
+
 public class Point {
     private int x;
     private int y;
-    Point point;
 
     public Point() {
     }
@@ -26,7 +27,11 @@ public class Point {
     }
 
     public Point(int x, int y) {
-        setX(this.x = x);
-        setY(this.y = y);
+        this.x = x;
+        this.y = y;
+    }
+
+    public static Point getRandomPoint() {
+        return new Point(new Random().nextInt(3), new Random().nextInt(3));
     }
 }

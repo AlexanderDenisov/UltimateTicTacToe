@@ -11,13 +11,11 @@ public class FieldMaker {
         field = new Field();
         field.setFieldSize(3);
         field.setHorizontalCoordinates(field.getFieldSize());
-        field.setBlankCell("[ ]");
-        field.setPlayingField(field.getBlankCell(), field.getFieldSize());
+        field.setPlayingField(field.getFieldSize());
     }
 
     public Field getField() {
         field.getHorizontalCoordinates();
-        field.getRandomPoint();
         field.getPlayingField();
         return field;
     }

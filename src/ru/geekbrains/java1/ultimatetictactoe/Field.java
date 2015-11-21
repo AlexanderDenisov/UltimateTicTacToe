@@ -4,11 +4,13 @@ package ru.geekbrains.java1.ultimatetictactoe;
 import java.util.Random;
 
 public class Field {
-    private String blankCell;
     private int fieldSize;
     private String[][] playingField;
-    private Random random = new Random();
-    private Point point;
+    String type;
+
+    public enum String {
+        X, O, NOT_SET
+    }
 
     Field() {
     }
@@ -24,35 +26,19 @@ public class Field {
         }
     }
 
-    public void setPlayingField(String blankCell, int fieldSize) {
+    public void setPlayingField(int fieldSize) {
         this.fieldSize = fieldSize;
-        this.blankCell = blankCell;
         playingField = new String[fieldSize][fieldSize];
         for (int i = 0; i < playingField.length; i++) {
             for (int j = 0; j < playingField.length; j++) {
-                playingField[j][i] = blankCell;
+                playingField[j][i] = String.NOT_SET;
             }
         }
     }
 
-    public String[][] getRandomXPoint() {
-        point = new Point(random.nextInt(fieldSize), random.nextInt(fieldSize));
-        playingField[point.getX()][point.getY()] = "[X]";
-        return playingField;
-    }
-
-    public String[][] getRandomOPoint() {
-        point = new Point(random.nextInt(fieldSize), random.nextInt(fieldSize));
-        playingField[point.getX()][point.getY()] = "[O]";
-        return playingField;
-    }
-
-    public void getRandomPoint() {
-        point = new Point(random.nextInt(fieldSize), random.nextInt(fieldSize));
-        if (playingField[point.getX()][point.getY()] == "[ ]") {
-            getRandomXPoint();
-        } else {
-            getRandomOPoint();
+    public void doShoot(Point point) {
+        if (playingField[point.getX()][point.getY()] == String.NOT_SET) {
+            playingField[point.getX()][point.getY()] = type;
         }
     }
 
@@ -66,14 +52,6 @@ public class Field {
             System.out.print("\n");
         }
         return playingField;
-    }
-
-    public void setBlankCell(String blankCell) {
-        this.blankCell = blankCell;
-    }
-
-    public String getBlankCell() {
-        return blankCell;
     }
 
     public void setFieldSize(int fieldSize) {

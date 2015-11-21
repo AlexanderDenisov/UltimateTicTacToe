@@ -1,10 +1,11 @@
 package ru.geekbrains.java1.ultimatetictactoe;
 
 
-public class Player implements Shootable {
+public class Computer implements Shootable {
 
     @Override
     public Point doShoot() {
-        return null;
+        return Point.getRandomPoint();
+
     }
 }

@@ -1,64 +1,61 @@
 package ru.geekbrains.java1.ultimatetictactoe;
 
 
-import java.util.Random;
-
 public class Field {
-    private int fieldSize;
-    private String[][] playingField;
-    String type;
+    Type[][] cells;
 
-    public enum String {
-        X, O, NOT_SET
+    public enum Type {
+        X, O, N
     }
 
     Field() {
-    }
-
-    public void setHorizontalCoordinates(int fieldSize) {
-        this.fieldSize = fieldSize;
-    }
-
-    public void getHorizontalCoordinates() {
-        System.out.print(" " + " ");
-        for (int i = 1; i < fieldSize + 1; i++) {
-            System.out.print(" " + i + " ");
-        }
-    }
-
-    public void setPlayingField(int fieldSize) {
-        this.fieldSize = fieldSize;
-        playingField = new String[fieldSize][fieldSize];
-        for (int i = 0; i < playingField.length; i++) {
-            for (int j = 0; j < playingField.length; j++) {
-                playingField[j][i] = String.NOT_SET;
+        cells = new Type[3][3];
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells.length; j++) {
+                cells[j][i] = Type.N;
             }
         }
     }
 
-    public void doShoot(Point point) {
-        if (playingField[point.getX()][point.getY()] == String.NOT_SET) {
-            playingField[point.getX()][point.getY()] = type;
+    public void doShoot(Point point, Type type) {
+        if (cells[point.getX()][point.getY()] == Type.N) {
+            cells[point.getX()][point.getY()] = type;
+        } else if (cells[point.getX()][point.getY()] == Type.X || cells[point.getX()][point.getY()] == Type.O) {
+            System.out.println("Not allowed!");
         }
     }
 
-    public String[][] getPlayingField() {
-        System.out.println();
-        for (int i = 0; i < playingField.length; i++) {
-            System.out.print((i + 1) + " ");
-            for (int j = 0; j < playingField.length; j++) {
-                System.out.print(playingField[j][i]);
+    public void showField() {
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells.length; j++) {
+                System.out.print(cells[j][i] + " ");
             }
             System.out.print("\n");
         }
-        return playingField;
     }
 
-    public void setFieldSize(int fieldSize) {
-        this.fieldSize = fieldSize;
-    }
-
-    public int getFieldSize() {
-        return fieldSize;
+    public int setWinner() {
+        if ((cells[0][0] == Type.X && cells[0][1] == Type.X && cells[0][2] == Type.X) ||
+                (cells[1][0] == Type.X && cells[1][1] == Type.X && cells[1][2] == Type.X) ||
+                (cells[2][0] == Type.X && cells[2][1] == Type.X && cells[2][2] == Type.X) ||
+                (cells[0][0] == Type.X && cells[1][0] == Type.X && cells[2][0] == Type.X) ||
+                (cells[0][1] == Type.X && cells[1][1] == Type.X && cells[2][1] == Type.X) ||
+                (cells[0][2] == Type.X && cells[1][2] == Type.X && cells[2][2] == Type.X) ||
+                (cells[0][0] == Type.X && cells[1][1] == Type.X && cells[2][2] == Type.X) ||
+                (cells[0][2] == Type.X && cells[1][1] == Type.X && cells[2][0] == Type.X)) {
+            return 1;
+        }
+        if ((cells[0][0] == Type.O && cells[0][1] == Type.O && cells[0][2] == Type.O) ||
+                (cells[1][0] == Type.O && cells[1][1] == Type.O && cells[1][2] == Type.O) ||
+                (cells[2][0] == Type.O && cells[2][1] == Type.O && cells[2][2] == Type.O) ||
+                (cells[0][0] == Type.O && cells[1][0] == Type.O && cells[2][0] == Type.O) ||
+                (cells[0][1] == Type.O && cells[1][1] == Type.O && cells[2][1] == Type.O) ||
+                (cells[0][2] == Type.O && cells[1][2] == Type.O && cells[2][2] == Type.O) ||
+                (cells[0][0] == Type.O && cells[1][1] == Type.O && cells[2][2] == Type.O) ||
+                (cells[0][2] == Type.O && cells[1][1] == Type.O && cells[2][0] == Type.O)) {
+            return 2;
+        }
+        return 0;
     }
 }
+

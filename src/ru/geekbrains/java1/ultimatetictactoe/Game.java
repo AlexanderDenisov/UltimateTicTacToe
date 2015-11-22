@@ -17,35 +17,43 @@ public class Game {
     private Game() {
     }
 
-    void init() {
+    public static void init() {
         field = new Field();
     }
 
     public static void start() {
+        System.out.println("___КРЕСТИКИ-НОЛИКИ___");
         field.showField();
-        System.out.println("___________________________");
         for (int i = 0; i < 10; i++) {
             field.setWinner();
             if (field.setWinner() == 1) {
                 System.out.println("Победили X");
+                System.out.println("___GAME OVER___");
                 break;
             }
             if (field.setWinner() == 2) {
                 System.out.println("Победили O");
+                System.out.println("___GAME OVER___");
                 break;
             } else {
+                System.out.println("___ХОДЯТ КРЕСТИКИ___");
                 field.doShoot(player.getShoot(), Field.Type.X);
                 field.showField();
                 field.setWinner();
-                System.out.println("___________________________");
+                System.out.println("___ХОДЯТ НОЛИКИ___");
                 field.doShoot(computer.getShoot(), Field.Type.O);
                 field.showField();
                 field.setWinner();
-                System.out.println("___________________________");
             }
         }
         if (field.setWinner() == 0) {
             System.out.println("Ничья!");
         }
+    }
+
+    public static void reset() {
+        field.resetField();
+        System.out.println("\n_____НОВАЯ ИГРА______");
+        field.showField();
     }
 }

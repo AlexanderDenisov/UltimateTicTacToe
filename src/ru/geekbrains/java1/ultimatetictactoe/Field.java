@@ -57,5 +57,12 @@ public class Field {
         }
         return 0;
     }
-}
 
+    public void resetField() {
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells.length; j++) {
+                cells[j][i] = Type.N;
+            }
+        }
+    }
+}

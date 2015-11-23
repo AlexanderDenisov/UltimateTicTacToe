@@ -59,7 +59,12 @@ public class Field {
                 (cells[0][2] == Type.O && cells[1][1] == Type.O && cells[2][0] == Type.O)) {
             return 2;
         }
-        return 0;
+        if (cells[0][0] != Type.N && cells[0][1] != Type.N && cells[0][2] != Type.N &&
+                cells[1][0] != Type.N && cells[1][1] != Type.N && cells[1][2] != Type.N &&
+                cells[2][0] != Type.N && cells[2][1] != Type.N && cells[2][2] != Type.N) {
+            return 0;
+        }
+        return 3;
     }
 
     public void resetField() {

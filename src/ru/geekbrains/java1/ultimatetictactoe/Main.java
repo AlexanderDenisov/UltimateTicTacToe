@@ -1,11 +1,12 @@
 package ru.geekbrains.java1.ultimatetictactoe;
 
 
+import ru.geekbrains.java1.ultimatetictactoe.views.GameWindow;
+
 public class Main {
     public static void main(String[] args) {
-        Game game = Game.getInstance();
-        game.init();
-        game.start();
-        game.reset();
+        GameWindow gameWindow = new GameWindow();
+        gameWindow.init();
+
     }
 }

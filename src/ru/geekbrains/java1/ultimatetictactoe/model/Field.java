@@ -1,4 +1,4 @@
-package ru.geekbrains.java1.ultimatetictactoe;
+package ru.geekbrains.java1.ultimatetictactoe.model;
 
 
 public class Field {

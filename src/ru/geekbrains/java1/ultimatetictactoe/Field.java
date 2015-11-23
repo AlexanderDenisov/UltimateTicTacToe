@@ -18,10 +18,14 @@ public class Field {
     }
 
     public void doShoot(Point point, Type type) {
+        if (cells[point.getX()][point.getY()] == Type.X) {
+            doShoot(Point.getRandomPoint(), type);
+        }
+        if (cells[point.getX()][point.getY()] == Type.O) {
+            doShoot(Point.getRandomPoint(), type);
+        }
         if (cells[point.getX()][point.getY()] == Type.N) {
             cells[point.getX()][point.getY()] = type;
-        } else if (cells[point.getX()][point.getY()] == Type.X || cells[point.getX()][point.getY()] == Type.O) {
-            System.out.println("Not allowed!");
         }
     }
 

@@ -1,6 +1,8 @@
 package ru.geekbrains.java1.ultimatetictactoe.views;
 
 import ru.geekbrains.java1.ultimatetictactoe.controllers.GameWindowController;
+import ru.geekbrains.java1.ultimatetictactoe.model.Field;
+import ru.geekbrains.java1.ultimatetictactoe.model.Point;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,42 +12,21 @@ import java.awt.event.ActionListener;
 
 public class GameWindow extends JFrame {
     JPanel jPanel = new JPanel();
-    JButton[][] buttons = new JButton[3][3];
+    JButton[][] buttons = new JButton[Field.getFieldSize()][Field.getFieldSize()];
 
     public void init() {
-        setSize(700, 400);
+        setSize(400, 400);
         setTitle("КРЕСТИКИ - НОЛИКИ");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        //setLayout(new BorderLayout());
-        jPanel.setLayout(new FlowLayout()); //работает по умолчанию
-
-        jPanel.setLayout(new GridLayout(3, 3));
-
-        /*JButton jButton = new JButton("Hello!");
-        add(jButton, BorderLayout.NORTH);
-
-        JButton jButton2 = new JButton("Bye!");
-        add(jButton2, BorderLayout.CENTER);
-
-        add(new JButton("SOUTH"), BorderLayout.SOUTH);
-        add(new JButton("EAST"), BorderLayout.EAST);
-        add(new JButton("WEST"), BorderLayout.WEST);*/
+        jPanel.setLayout(new GridLayout(Field.getFieldSize(), Field.getFieldSize()));
 
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons.length; j++) {
                 JButton jButton = new JButton();
-                jButton.setText(j % 2 == 0 ? "X" : "0");
+                jButton.setText(" ");
                 buttons[i][j] = jButton;
                 jPanel.add(jButton);
-
-                /*ActionListener actionListener = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println("Кликнули");
-                    }
-                };
-                jButton.addActionListener(actionListener);*/
 
                 final int finalJ = j;
                 final int finalI = i;
@@ -62,12 +43,27 @@ public class GameWindow extends JFrame {
 
         add(jPanel);
 
+
         JPanel jPanelSouth = new JPanel();
-        jPanelSouth.add(new JButton("RESTART"));
-        jPanelSouth.add(new JButton("NEW GAME"));
+        JButton newGameButton = new JButton("NEW GAME");
+        newGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameWindowController.startNewGame();
+            }
+        });
+        jPanelSouth.add(newGameButton);
 
+
+        JButton restartButton = new JButton("RESTART");
+        restartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameWindowController.restartGame();
+            }
+        });
+        jPanelSouth.add(restartButton);
         add(jPanelSouth, BorderLayout.NORTH);
-
         setVisible(true);
 
     }

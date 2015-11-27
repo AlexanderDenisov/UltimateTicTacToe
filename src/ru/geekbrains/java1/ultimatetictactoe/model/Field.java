@@ -2,14 +2,15 @@ package ru.geekbrains.java1.ultimatetictactoe.model;
 
 
 public class Field {
-    Type[][] cells;
+    private static Type[][] cells;
+    final static int fieldSize = 3;
 
     public enum Type {
         X, O, N
     }
 
-    Field() {
-        cells = new Type[3][3];
+    public Field() {
+        cells = new Type[getFieldSize()][getFieldSize()];
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells.length; j++) {
                 cells[j][i] = Type.N;
@@ -17,18 +18,41 @@ public class Field {
         }
     }
 
-    public void doShoot(Point point, Type type) {
+    public void setCells(Type[][] cells) {
+        this.cells = cells;
+    }
+
+    public Type[][] getCells() {
+        return cells;
+    }
+
+    public static int getFieldSize() {
+        return fieldSize;
+    }
+
+    public void computerDoShootX(Point point, Type type) {
         if (cells[point.getX()][point.getY()] == Type.X) {
-            doShoot(Point.getRandomPoint(), type);
+            computerDoShootX(Point.getRandomPoint(), type);
         }
         if (cells[point.getX()][point.getY()] == Type.O) {
-            doShoot(Point.getRandomPoint(), type);
+            computerDoShootX(Point.getRandomPoint(), type);
         }
         if (cells[point.getX()][point.getY()] == Type.N) {
             cells[point.getX()][point.getY()] = type;
         }
     }
 
+    //TODO сделать так, чтобы игра не продолжалась, если игрок пошел в занятую клетку.
+    public void playerDoShootO(Point point) {
+        if (cells[point.getX()][point.getY()] == Type.X || cells[point.getX()][point.getY()] == Type.O) {
+            System.out.println("Эта ячейка занята! Сделайте другой ход!");
+        }
+        if (cells[point.getX()][point.getY()] == Type.N) {
+            cells[point.getX()][point.getY()] = Type.O;
+        }
+    }
+
+    // TODO обратиться к вьюшке;
     public void showField() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells.length; j++) {
@@ -67,11 +91,7 @@ public class Field {
         return 3;
     }
 
-    public void resetField() {
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells.length; j++) {
-                cells[j][i] = Type.N;
-            }
-        }
+    public static Field resetField() {
+        return new Field();
     }
 }

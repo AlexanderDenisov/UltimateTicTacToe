@@ -1,11 +1,13 @@
 package ru.geekbrains.java1.ultimatetictactoe.model;
 
 
+import ru.geekbrains.java1.ultimatetictactoe.views.GameWindow;
+
 public class Game {
     private static Game instance;
-    public static GameActivity gamePlay;
+    private static GameActivity gamePlay;
 
-    protected static Game getInstance() {
+    public static Game getInstance() {
         if (instance == null) {
             instance = new Game();
         }
@@ -15,15 +17,18 @@ public class Game {
     private Game() {
     }
 
-    public static void init() {
+    public void init() {
+        GameWindow gameWindow = new GameWindow();
+        gameWindow.init();
         gamePlay = new GameActivity();
     }
 
-    public static void start() {
+    public void start() {
         gamePlay.gamePlaying();
     }
 
-    public static void reset() {
+    void reset() {
         gamePlay.clearField();
+        start();
     }
 }

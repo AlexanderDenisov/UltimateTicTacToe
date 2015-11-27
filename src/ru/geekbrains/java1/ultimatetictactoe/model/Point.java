@@ -29,6 +29,6 @@ public class Point {
     }
 
     public static Point getRandomPoint() {
-        return new Point(new Random().nextInt(3), new Random().nextInt(3));
+        return new Point(new Random().nextInt(Field.getFieldSize()), new Random().nextInt(Field.getFieldSize()));
     }
 }

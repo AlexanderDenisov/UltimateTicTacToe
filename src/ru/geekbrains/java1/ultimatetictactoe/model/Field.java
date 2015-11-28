@@ -43,11 +43,13 @@ public class Field {
     }
 
     //TODO сделать так, чтобы игра не продолжалась, если игрок пошел в занятую клетку.
-    public void playerDoShootO(Point point) {
+    public void playerDoShootO(Point point) throws Exception {
         if (cells[point.getX()][point.getY()] == Type.X || cells[point.getX()][point.getY()] == Type.O) {
-            System.out.println("Эта ячейка занята! Сделайте другой ход!");
+            Player.isShoot = false;
+            throw new Exception();
         }
         if (cells[point.getX()][point.getY()] == Type.N) {
+            Player.isShoot = true;
             cells[point.getX()][point.getY()] = Type.O;
         }
     }

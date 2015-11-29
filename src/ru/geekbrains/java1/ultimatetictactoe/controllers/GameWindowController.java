@@ -6,6 +6,10 @@ import ru.geekbrains.java1.ultimatetictactoe.model.Point;
 
 
 public class GameWindowController {
+
+    public GameWindowController() {
+    }
+
     public static void doShoot(Point point) {
         Player.point = point;
         Player.isShoot = true;
@@ -15,5 +19,7 @@ public class GameWindowController {
     }
 
     public static void startNewGame() {
+
+
     }
 }

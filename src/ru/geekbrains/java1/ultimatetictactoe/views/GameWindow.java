@@ -44,7 +44,7 @@ public class GameWindow extends JFrame {
         add(jPanel);
 
 
-        JPanel jPanelSouth = new JPanel();
+        JPanel jPanelNorth = new JPanel();
         JButton newGameButton = new JButton("NEW GAME");
         newGameButton.addActionListener(new ActionListener() {
             @Override
@@ -52,8 +52,12 @@ public class GameWindow extends JFrame {
                 GameWindowController.startNewGame();
             }
         });
-        jPanelSouth.add(newGameButton);
+        jPanelNorth.add(newGameButton);
 
+        JPanel jPanelSouth = new JPanel();
+        JLabel infoText = new JLabel("GJBYN");
+        jPanelSouth.add(infoText);
+        add(jPanelSouth, BorderLayout.SOUTH);
 
         JButton restartButton = new JButton("RESTART");
         restartButton.addActionListener(new ActionListener() {
@@ -62,8 +66,8 @@ public class GameWindow extends JFrame {
                 GameWindowController.restartGame();
             }
         });
-        jPanelSouth.add(restartButton);
-        add(jPanelSouth, BorderLayout.NORTH);
+        jPanelNorth.add(restartButton);
+        add(jPanelNorth, BorderLayout.NORTH);
         setVisible(true);
 
     }

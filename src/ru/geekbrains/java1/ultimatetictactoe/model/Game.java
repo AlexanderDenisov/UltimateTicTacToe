@@ -21,6 +21,7 @@ public class Game {
         GameWindow gameWindow = new GameWindow();
         gameWindow.init();
         gamePlay = new GameActivity();
+        gamePlay.reset();
     }
 
     public void start() {
@@ -28,7 +29,5 @@ public class Game {
     }
 
     void reset() {
-        gamePlay.clearField();
-        start();
     }
 }

@@ -2,9 +2,21 @@ package ru.geekbrains.java1.ultimatetictactoe.model;
 
 
 public class GameActivity {
-    private Field field = new Field();
-    private Computer computer = new Computer();
-    private Player player = new Player();
+    private Field field;
+    private Computer computer;
+    private Player player;
+
+    public GameActivity() {
+    }
+
+    private void resetPlayers() {
+        player = new Player();
+        computer = new Computer();
+    }
+
+    private void resetField() {
+        field = new Field();
+    }
 
     public void gamePlaying() {
         System.out.println("___КРЕСТИКИ-НОЛИКИ___"); // приветствие;
@@ -40,7 +52,6 @@ public class GameActivity {
                         field.playerDoShootO(player.doShoot()); // ход ноликов
                     } catch (Exception e) {
                         System.out.println("Вы сделали ход в занятую клетку. Сделайте новый ход.");
-                        ;
                     }
                 } while (!Player.isShoot);
                 field.showField();// показываем поле после хода ноликов
@@ -63,10 +74,9 @@ public class GameActivity {
         }
     }
 
-    public void clearField() {
-        field.resetField();
+    public void reset() {
+        resetField();
+        resetPlayers();
         System.out.println("\n_____НОВАЯ ИГРА______");
-        field.showField();
-        gamePlaying();
     }
 }

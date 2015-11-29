@@ -9,6 +9,7 @@ public class Field {
         X, O, N
     }
 
+    //конструктор игрового поля.
     public Field() {
         cells = new Type[getFieldSize()][getFieldSize()];
         for (int i = 0; i < cells.length; i++) {
@@ -18,7 +19,7 @@ public class Field {
         }
     }
 
-    public void setCells(Type[][] cells) {
+    private void setCells(Type[][] cells) {
         this.cells = cells;
     }
 
@@ -30,6 +31,7 @@ public class Field {
         return fieldSize;
     }
 
+    //ход делает компьютер играющий за крестик
     public void computerDoShootX(Point point, Type type) {
         if (cells[point.getX()][point.getY()] == Type.X) {
             computerDoShootX(Point.getRandomPoint(), type);
@@ -42,7 +44,8 @@ public class Field {
         }
     }
 
-    //TODO сделать так, чтобы игра не продолжалась, если игрок пошел в занятую клетку.
+    // сделать так, чтобы игра не продолжалась, если игрок пошел в занятую клетку. Решено
+    // проверка хода игрока играющего за нолики
     public void playerDoShootO(Point point) throws Exception {
         if (cells[point.getX()][point.getY()] == Type.X || cells[point.getX()][point.getY()] == Type.O) {
             Player.isShoot = false;
@@ -55,6 +58,7 @@ public class Field {
     }
 
     // TODO обратиться к вьюшке;
+    //показываем поле
     public void showField() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells.length; j++) {
@@ -64,6 +68,7 @@ public class Field {
         }
     }
 
+    // проверка, есть ли победитель
     public int setWinner() {
         if ((cells[0][0] == Type.X && cells[0][1] == Type.X && cells[0][2] == Type.X) ||
                 (cells[1][0] == Type.X && cells[1][1] == Type.X && cells[1][2] == Type.X) ||
@@ -91,9 +96,5 @@ public class Field {
             return 0;
         }
         return 3;
-    }
-
-    public static Field resetField() {
-        return new Field();
     }
 }

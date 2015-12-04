@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 
 public class GameWindow extends JFrame {
+    GameWindowController gameWindowController = new GameWindowController();
     JPanel jPanel = new JPanel();
     JButton[][] buttons = new JButton[Field.getFieldSize()][Field.getFieldSize()];
 
@@ -21,10 +22,15 @@ public class GameWindow extends JFrame {
 
         jPanel.setLayout(new GridLayout(Field.getFieldSize(), Field.getFieldSize()));
 
+        JPanel jPanelSouth = new JPanel();
+        JLabel infoText = new JLabel("Старт!");
+        jPanelSouth.add(infoText);
+        add(jPanelSouth, BorderLayout.SOUTH);
+
         for (int i = 0; i < buttons.length; i++) {
             for (int j = 0; j < buttons.length; j++) {
                 JButton jButton = new JButton();
-                jButton.setText(" ");
+                jButton.setText("");
                 buttons[i][j] = jButton;
                 jPanel.add(jButton);
 
@@ -35,7 +41,8 @@ public class GameWindow extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         String buttonText = e.getActionCommand();
                         System.out.printf("Button: %s, X: %d, Y: %d \n", buttonText, finalJ, finalI);
-                        GameWindowController.doShoot(new Point(finalJ, finalI));
+                        gameWindowController.doShoot(new Point(finalJ, finalI));
+                        infoText.setText("ХОД НОЛИКОВ. X: " + finalJ + ", " + " Y: " + finalI);
                     }
                 });
             }
@@ -43,32 +50,21 @@ public class GameWindow extends JFrame {
 
         add(jPanel);
 
-
         JPanel jPanelNorth = new JPanel();
-        JButton newGameButton = new JButton("NEW GAME");
-        newGameButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GameWindowController.startNewGame();
-            }
-        });
-        jPanelNorth.add(newGameButton);
-
-        JPanel jPanelSouth = new JPanel();
-        JLabel infoText = new JLabel("GJBYN");
-        jPanelSouth.add(infoText);
-        add(jPanelSouth, BorderLayout.SOUTH);
-
         JButton restartButton = new JButton("RESTART");
         restartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GameWindowController.restartGame();
+                if (e.getActionCommand().equals("RESTART")) {
+                    gameWindowController.restartGame();
+                    infoText.setText("НОВАЯ ИГРА. Старт.");
+                } else {
+                    infoText.setText("ERROR!");
+                }
             }
         });
         jPanelNorth.add(restartButton);
         add(jPanelNorth, BorderLayout.NORTH);
         setVisible(true);
-
     }
 }

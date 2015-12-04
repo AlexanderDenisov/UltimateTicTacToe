@@ -24,10 +24,7 @@ public class Game {
         gamePlay.reset();
     }
 
-    public void start() {
+    public static void start() {
         gamePlay.gamePlaying();
-    }
-
-    void reset() {
     }
 }

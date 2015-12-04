@@ -5,12 +5,16 @@ public class GameActivity {
     private Field field;
     private Computer computer;
     private Player player;
+    private volatile boolean isGameOver = false;
 
     public GameActivity() {
     }
 
-    private void resetPlayers() {
+    private void resetPlayer() {
         player = new Player();
+    }
+
+    private void resetComputer() {
         computer = new Computer();
     }
 
@@ -18,52 +22,75 @@ public class GameActivity {
         field = new Field();
     }
 
-    public void gamePlaying() {
-        System.out.println("___КРЕСТИКИ-НОЛИКИ___"); // приветствие;
-        //pause();
-        field.showField(); // показываем пустое поле;
-        for (int i = 0; i < 10; i++) {
-            // проверяем есть ли победитель;
-            if (field.setWinner() == 3) { //если победителя нет, то ходят крестики;
-                //pause();
+    public void reset() {
+        resetField();
+        resetComputer();
+        resetPlayer();
+        System.out.println("\n_____НОВАЯ ИГРА______");
+    }
+
+    private void gameOver() {
+        if (field.setWinner() == 1) {
+            System.out.println("___ПОБЕДИЛИ КРЕСТИКИ!___");
+            System.out.println("\n___GAME OVER___");
+            isGameOver = true;
+        }
+        if (field.setWinner() == 2) {
+            System.out.println("___ПОБЕДИЛИ НОЛИКИ!___");
+            System.out.println("\n___GAME OVER___");
+            isGameOver = true;
+        }
+        if (field.setWinner() == 0) {
+            System.out.println("___НИЧЬЯ!___");
+            System.out.println("\n___GAME OVER___");
+            isGameOver = true;
+        }
+    }
+
+    public void computerMove() {
+        switch (field.setWinner()) {
+            case 3:
                 System.out.println("___ХОДЯТ КРЕСТИКИ___");
-                field.computerDoShootX(computer.doShoot(), Field.Type.X); // ход крестиков
-                pause();
-                field.showField(); // показываем поле после хода крестиков;
-                // проверяем есть ли победитель после хода крестиков;
-                if (field.setWinner() == 0) {//если после хода крестиков не осталось пустых клеток, но трех подряд X или 0 нет
-                    pause();
-                    System.out.println("___НИЧЬЯ!___"); // то ничья;
-                    System.out.println("\n___GAME OVER___");
-                    break; // игра заканчивается;
-                }
-                if (field.setWinner() == 1) { // если есть три клетки подряд заполнениые Х, то победили крестики;
-                    pause();
-                    System.out.println("___ПОБЕДИЛИ КРЕСТИКИ!___");
-                    System.out.println("\n___GAME OVER___");
-                    break; // игра заканчивается;
-                }
-                //проверяем есть ли победитель;
-                // и если победителя нет, то ходят нолики
-                pause();
+                field.computerDoShootX(computer.doShoot(), Field.Type.X);
+                field.showField();
+                break;
+            case 0:
+                gameOver();
+                break;
+            case 1:
+                gameOver();
+                break;
+        }
+    }
+
+    private void playerMove() {
+        switch (field.setWinner()) {
+            case 3:
                 System.out.println("___ХОДЯТ НОЛИКИ___");
                 do {
                     try {
-                        field.playerDoShootO(player.doShoot()); // ход ноликов
+                        field.playerDoShootO(player.doShoot());
                     } catch (Exception e) {
                         System.out.println("Вы сделали ход в занятую клетку. Сделайте новый ход.");
                     }
                 } while (!Player.isShoot);
-                field.showField();// показываем поле после хода ноликов
-                // и проверяем есть ли победитель после хода ноликов:
-                if (field.setWinner() == 2) {
-                    pause();// если есть три клетки подряд заполнениые 0, то победили нолики;
-                    System.out.println("___ПОБЕДИЛИ НОЛИКИ!___");
-                    System.out.println("\n___GAME OVER___");
-                    break; // игра заканчивается;
-                }
-            }
+                field.showField();
+                break;
+            case 2:
+                gameOver();
+                break;
         }
+    }
+
+    public void gamePlaying() {
+        System.out.println("___КРЕСТИКИ-НОЛИКИ___");
+        field.showField();
+        do {
+            computerMove();
+            pause();
+            playerMove();
+            pause();
+        } while (!isGameOver);
     }
 
     private static void pause() {
@@ -72,11 +99,5 @@ public class GameActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public void reset() {
-        resetField();
-        resetPlayers();
-        System.out.println("\n_____НОВАЯ ИГРА______");
     }
 }

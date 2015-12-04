@@ -10,16 +10,12 @@ public class GameWindowController {
     public GameWindowController() {
     }
 
-    public static void doShoot(Point point) {
+    public void doShoot(Point point) {
         Player.point = point;
         Player.isShoot = true;
     }
 
-    public static void restartGame() {
-    }
-
-    public static void startNewGame() {
-
-
+    //TODO реализовать;
+    public void restartGame() {
     }
 }

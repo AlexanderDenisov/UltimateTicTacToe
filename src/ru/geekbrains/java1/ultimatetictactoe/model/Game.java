@@ -1,11 +1,12 @@
 package ru.geekbrains.java1.ultimatetictactoe.model;
 
 
+import ru.geekbrains.java1.ultimatetictactoe.views.GameConsolView;
 import ru.geekbrains.java1.ultimatetictactoe.views.GameWindow;
 
 public class Game {
     private static Game instance;
-    private static GameActivity gamePlay;
+    private static GameActivity gameActivity;
 
     public static Game getInstance() {
         if (instance == null) {
@@ -20,11 +21,12 @@ public class Game {
     public void init() {
         GameWindow gameWindow = new GameWindow();
         gameWindow.init();
-        gamePlay = new GameActivity();
-        gamePlay.reset();
+        gameActivity = new GameActivity();
+        gameActivity.reset();
+        GameConsolView consolView = new GameConsolView(gameActivity);
     }
 
     public static void start() {
-        gamePlay.gamePlaying();
+        gameActivity.gamePlaying();
     }
 }

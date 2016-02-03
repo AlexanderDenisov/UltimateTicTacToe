@@ -1,9 +1,12 @@
 package ru.geekbrains.java1.ultimatetictactoe.model;
 
 
+import ru.geekbrains.java1.ultimatetictactoe.views.GameWindow;
+
 public class Field {
     private static Type[][] cells;
     final static int fieldSize = 3;
+    private GameWindow gameWindow = new GameWindow();
 
     public enum Type {
         X, O, N
@@ -14,7 +17,7 @@ public class Field {
         cells = new Type[getFieldSize()][getFieldSize()];
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells.length; j++) {
-                cells[j][i] = Type.N;
+                cells[i][j] = Type.N;
             }
         }
     }
@@ -41,6 +44,7 @@ public class Field {
         }
         if (cells[point.getX()][point.getY()] == Type.N) {
             cells[point.getX()][point.getY()] = type;
+            gameWindow.updateWindowWithX(point.getX(), point.getY());
         }
     }
 
@@ -54,6 +58,7 @@ public class Field {
         if (cells[point.getX()][point.getY()] == Type.N) {
             Player.isShoot = true;
             cells[point.getX()][point.getY()] = Type.O;
+            gameWindow.updateWindowWithO(point.getX(), point.getY());
         }
     }
 
@@ -62,7 +67,7 @@ public class Field {
     public void showField() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells.length; j++) {
-                System.out.print(cells[j][i] + " ");
+                System.out.print(cells[i][j] + " ");
             }
             System.out.print("\n");
         }

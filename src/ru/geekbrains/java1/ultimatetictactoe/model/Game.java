@@ -1,6 +1,7 @@
 package ru.geekbrains.java1.ultimatetictactoe.model;
 
 
+import ru.geekbrains.java1.ultimatetictactoe.controllers.GameWindowController;
 import ru.geekbrains.java1.ultimatetictactoe.views.GameConsolView;
 import ru.geekbrains.java1.ultimatetictactoe.views.GameWindow;
 
@@ -19,7 +20,8 @@ public class Game {
     }
 
     public void init() {
-        GameWindow gameWindow = new GameWindow();
+        GameWindowController controller = new GameWindowController();
+        GameWindow gameWindow = new GameWindow(controller);
         gameWindow.init();
         gameActivity = new GameActivity();
         gameActivity.reset();
